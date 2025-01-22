@@ -77,26 +77,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <ConfigProvider 
-        theme={
-          {
-            token:{
-              colorPrimary: 'yellow',
-              // fontFamily: 'sans-serif',
-              // colorBgBase: 'red',
-              // colorBgContainer: 'red'
-              fontSize: 14
-            },
-            components:{
-              Layout: {
-                triggerBg:'red'
-                // colorBgBody: 'red',
-                // colorBgContainer: '#FFF8DC',
-              }
-            
-            }
-        }}
-       
+      <ConfigProvider  
       >
         <RefineKbarProvider>
          {/* <div className={`p-2 ${mode == 'dark' ? 'bg-[black]' : 'bg-[white]'}`}> */}
@@ -188,12 +169,11 @@ const App: React.FC = () => {
                 edit: "/stores/:id/edit",
                 show: "/stores/:id",
                 meta:{
-                  // icon:
-                  
+                  icon: <BikeWhiteIcon />
                 }
-                // meta: {
-                //   // icon:,
-                // },
+                // // meta: {
+                //   icon:,
+                // // },
               },
             ]}
           >
@@ -206,6 +186,8 @@ const App: React.FC = () => {
                   >
                    {/* <div className="p-2">  */}
                    <ThemedLayoutV2 Header={Header} Title={Title} 
+                    // OffLayoutArea={()=> <>Layer</>}
+                    // Footer={()=><>Footer</>}
                     //  Sider={()=> <Sidebar />}
                     
                       >

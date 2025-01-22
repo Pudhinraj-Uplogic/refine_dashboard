@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   useGetLocale,
   useSetLocale,
@@ -14,6 +14,10 @@ import {
   ShoppingCartOutlined,
   BellOutlined,
   MenuOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  AlignLeftOutlined,
+  AlignRightOutlined,
 } from "@ant-design/icons";
 
 import {
@@ -31,6 +35,7 @@ import {
   theme,
   type MenuProps,
   Flex,
+  Divider,
 } from "antd";
 
 import { useTranslation } from "react-i18next";
@@ -40,6 +45,7 @@ import { useConfigProvider } from "../../context";
 import { IconMoon, IconSun } from "../../components/icons";
 import type { IOrder, IStore, ICourier, IIdentity } from "../../interfaces";
 import { useStyles } from "./styled";
+import { ThemedLayoutContext } from "@refinedev/antd";
 
 const { Header: AntdHeader } = AntdLayout;
 const { useToken } = theme;
@@ -66,6 +72,14 @@ export const Header: React.FC = () => {
   const { data: user } = useGetIdentity<IIdentity>();
   const screens = useBreakpoint();
   const t = useTranslate();
+
+  const collapse = useContext(ThemedLayoutContext);
+
+  console.log("collapse", collapse);
+
+  const handleCollapse = () => {
+    collapse.setSiderCollapsed(!collapse.siderCollapsed);
+  };
 
   const currentLocale = locale();
   const currentResource = useResource();
@@ -202,9 +216,9 @@ export const Header: React.FC = () => {
   return (
     <AntdHeader
       style={{
-        backgroundColor: token.colorBgElevated,
+        backgroundColor: mode === "light" ? "#FAFAF2" : "black",
         padding: screens.sm ? "5px 10px" : "10px 32px",
-        margin: '1%',
+        margin: "1%",
         textAlign: "center",
         // backgroundColor: screens.sm ? "red": "blue"
       }}>
@@ -236,16 +250,22 @@ export const Header: React.FC = () => {
             align="center"
             justify="start"
             vertical={false}
-            gap={16}
+            gap={2}
             style={{ backgroundColor: "" }}>
             {screens.xl || screens.lg || screens.md ? (
-              <MenuOutlined
+              <Button
+                type="text"
+                className={styles.themeSwitch}
                 style={{
-                  fontSize: "20px",
-                  margin: "-6px 0px 0 0",
-                  color: "#158078",
-                  fontWeight: "700",
+                  textAlign: "center",
+                  backgroundColor: "transparent",
+                  padding: "0",
+                  margin: "0",
                 }}
+                icon={
+                 collapse.siderCollapsed ? <AlignRightOutlined style={{ fontSize: "24px" , marginTop:-2, color:"#158078" }} /> : <AlignLeftOutlined style={{ fontSize: "24px", marginTop:-2, color:"#158078" }}/>
+                }
+                onClick={handleCollapse}
               />
             ) : null}
             <Typography.Title
@@ -253,9 +273,9 @@ export const Header: React.FC = () => {
               style={{
                 textAlign: "center",
                 fontSize: screens.sm ? "20px" : "14px",
-                padding: screens.sm ? "10px 12px" : "0 16px",
+                padding: screens.sm ? "10px 12px" : "0px 12px",
                 backgroundColor: "",
-                textTransform :"capitalize",
+                textTransform: "capitalize",
               }}>
               {currentResource?.resource?.name}
             </Typography.Title>
@@ -316,18 +336,38 @@ export const Header: React.FC = () => {
               <>
                 <Button
                   className={styles.themeSwitch}
+                  style={{
+                    textAlign: "center",
+                    backgroundColor: "transparent",
+                  }}
                   type="text"
-                  icon={<SearchOutlined />}
+                  icon={
+                    <SearchOutlined
+                      style={{ color: "#158078", fontSize: "20px" }}
+                    />
+                  }
                 />
 
                 <Button
                   className={styles.themeSwitch}
+                  style={{
+                    textAlign: "center",
+                    backgroundColor: "transparent",
+                  }}
                   type="text"
-                  icon={<BellOutlined />}
+                  icon={
+                    <BellOutlined
+                      style={{ color: "#158078", fontSize: "20px" }}
+                    />
+                  }
                 />
 
                 <Button
-                  className={styles.themeSwitch} style={{ textAlign : "center" ,backgroundColor:"transparent" }}
+                  className={styles.themeSwitch}
+                  style={{
+                    textAlign: "center",
+                    backgroundColor: "transparent",
+                  }}
                   type="text"
                   icon={mode === "light" ? <IconMoon /> : <IconSun />}
                   onClick={() => {
@@ -336,8 +376,26 @@ export const Header: React.FC = () => {
                 />
                 <Button
                   className={styles.themeSwitch}
+                  style={{
+                    textAlign: "center",
+                    backgroundColor: "transparent",
+                  }}
                   type="text"
-                  icon={<ShoppingCartOutlined />}
+                  icon={
+                    <ShoppingCartOutlined
+                      style={{ color: "#158078", fontSize: "20px" }}
+                    />
+                  }
+                />
+                <Divider
+                  style={{
+                    color: "Darkgrey",
+                    backgroundColor: "Darkgrey",
+                    height: "20px",
+                    padding: "0px 0px 0px 0px",
+                    margin: "0px 0 0 0",
+                  }}
+                  type="vertical"
                 />
               </>
             ) : (
@@ -345,9 +403,14 @@ export const Header: React.FC = () => {
             )}
 
             {/* </Flex> */}
-            <Flex align="center" gap={5}>
+            <Flex
+              align="center"
+              gap={5}
+              style={{
+                backgroundColor: "",
+              }}>
               <Avatar
-                size={screens.sm ? 50 : "small"}
+                size={screens.sm ? 45 : "small"}
                 src={user?.avatar}
                 alt={user?.name}
               />
@@ -357,7 +420,7 @@ export const Header: React.FC = () => {
                   {user?.name}
                 </Typography.Text>
                 <Typography.Text
-                  style={{ fontSize: `${screens.sm ? "12px" : "8px"}`, }}>
+                  style={{ fontSize: `${screens.sm ? "12px" : "8px"}` }}>
                   {/* {user?.name} */}
                   Admin
                 </Typography.Text>

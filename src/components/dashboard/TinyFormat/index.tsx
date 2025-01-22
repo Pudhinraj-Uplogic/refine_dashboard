@@ -15,13 +15,13 @@ export const TinyFormatCard = ({data ,height, width ,colorCode='#158078'}: Props
     width,
     height,
     smooth: true,
-    style: {
-      fill: `linear-gradient(10deg, 0, 0, 0.2, ${colorCode}, ${colorCode}`,
+    areaStyle: () => ({
+      fill: `l(270) 0:#fff 1:${colorCode}`,
       fillOpacity: 0.2,
-    },
+    }),
     line: {
       style: {
-        stroke: `${colorCode}`,
+        stroke: colorCode,
         strokeWidth: 2,
       },
     },

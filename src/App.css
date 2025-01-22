@@ -35,6 +35,10 @@ aside{
     border-top-right-radius: 15px;
 }
 
+.ant-layout-sider-children > ul>li:last-child{
+    display: none !important;
+    /* background-color: red !important; */
+}
 .ant-layout-sider-children > ul {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -43,6 +47,6 @@ aside{
 .ant-menu-item::after {
     right: auto !important;
     left: 0 !important;
-    /* border: 3px solid rebeccapurple !important; */
+    border: 3px solid #fbc901 !important;
   }
  

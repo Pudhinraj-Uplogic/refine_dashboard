@@ -92,10 +92,15 @@ export const CommonCard = (
       styles={{
         header: {
           backgroundColor: mode === "light" ? "#FAFAFA" : "#1F1F1F",
-          padding: "16px",
+          // padding: "16px",
           // border:"none",
+          // borderRadius: "50px",
         },
         body: {
+          borderRadius: "10px",
+          // boxShadow: `2px 4px 4px ${
+          //   mode === "light" ? "rgba(0, 0, 0, 0.25)" : "rgba(0, 0, 0, 0.25)"
+          // }`,
           ...(props?.bodyStyles || {}),
         },
       }}
@@ -114,12 +119,23 @@ export const CommonCard = (
         null
       }>
       <Flex align="center" gap={5} justify="start" vertical={false}>
-        {props.icon}
+        <Space
+          size={8}
+          style={{
+            backgroundColor: "#43a5e8",
+            padding: "2px",
+            borderRadius: "10%",
+            
+          }}>
+          {props.icon}
+        </Space>
         <Typography.Text
-        // level={5}
+          type="secondary"
+          // level={5}
           style={{
             fontWeight: 400,
-              // fontSize:"14px"
+            color: "#9b9897",
+            // fontSize:"14px"
           }}>
           {props.title}
         </Typography.Text>

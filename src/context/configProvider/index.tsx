@@ -65,7 +65,7 @@ export const ConfigProvider = ({
             
             Menu:{
               // radiusItem:100,
-              itemColor:  "white",
+              itemColor:  "#9bbfbc",
               itemActiveBg:"#158078",
               dangerItemColor:'#158078',
               // horizontalItemSelectedBg:"#158078",
@@ -76,7 +76,7 @@ export const ConfigProvider = ({
               // itemActiveBg: "green",
               // itemBg: "#158078",
               itemHoverBg: "#158078", // ok   
-              itemHoverColor: "blue",  // ok
+              itemHoverColor: "white",  // ok
               itemBorderRadius: 0,
               itemMarginInline:0,
               // itemMarginBlock:5,
@@ -88,13 +88,27 @@ export const ConfigProvider = ({
               // iconMarginInlineEnd:10, 
               activeBarHeight: 0,
               activeBarWidth: 5,
-              itemSelectedColor :"orange",
+              itemSelectedColor :"white",
               itemSelectedBg: "#158078",
-              subMenuItemSelectedColor :"blue",
+              subMenuItemSelectedColor :"white",
               colorBgContainer: "#158078",
               // itemHeight: 10, // ok
               // itemPaddingInline: 10, 
               // groupTitleColor: "red",
+            },
+            Card:{
+              // colorBgContainer:"red"
+
+            },
+            Table:{
+              // headerColor:"red",
+              // headerBg:"blue"
+
+                // colorBgBase:"blue",
+                // colorBorder :"red",
+                // colorBgContainer:"red",
+                // colorBgLayout:"blue",
+                // colorPrimaryBorder:"yellow"
             }
           }
         }}

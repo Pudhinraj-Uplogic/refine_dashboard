@@ -210,7 +210,7 @@ export const DashboardPage: React.FC = () => {
     return [
       264, 417, 438, 887, 309, 397, 550, 575, 563, 430, 525, 592, 492, 467, 513,
       546, 983, 340, 539, 243, 226, 192, 417,
-    ]
+    ];
   }, [newCustomersData]);
 
   return (
@@ -231,7 +231,11 @@ export const DashboardPage: React.FC = () => {
           <Row gutter={[10, 10]}>
             <Col xl={6} lg={6} md={12} sm={24} xs={24}>
               <CommonCard
-                icon={<DollarCircleOutlined style={{ color: "#158078", fontSize: 14, marginTop: -2 }} />}
+                icon={
+                  <DollarCircleOutlined
+                    style={{ color: "white", fontSize: 15, padding: 2 }}
+                  />
+                }
                 title={t("dashboard.dailyRevenue.title")}
                 bodyStyles={{
                   width: "100%",
@@ -240,7 +244,9 @@ export const DashboardPage: React.FC = () => {
                   // backgroundColor: "red",
                 }}>
                 <Flex align="center" justify="space-between" gap={8}>
-                  <Typography.Title level={2} style={{ textAlign: "center",margin:'0 0 0 0' }}>
+                  <Typography.Title
+                    level={2}
+                    style={{ textAlign: "center", margin: "0 0 0 0", fontFamily:"sans-serif" }}>
                     $1234
                   </Typography.Title>
                   <div
@@ -272,21 +278,30 @@ export const DashboardPage: React.FC = () => {
                     +12%
                   </Typography.Text>
 
-                  <Typography.Text style={{fontSize:13}}> Yesterday</Typography.Text>
+                  <Typography.Text style={{ fontSize: 13, color: "#9b9897" }}>
+                    {" "}
+                    Yesterday
+                  </Typography.Text>
                 </Flex>
               </CommonCard>
             </Col>
             <Col xl={6} lg={6} md={12} sm={24} xs={24}>
               <CommonCard
-                icon={<DollarCircleOutlined style={{ color: "#158078", fontSize: 14, marginTop: -2 }} />}
+                icon={
+                  <DollarCircleOutlined
+                    style={{ color: "white", fontSize: 15, padding: 2 }}
+                  />
+                }
                 title={t("dashboard.dailyRevenue.title")}
                 bodyStyles={{
                   width: "100%",
                   margin: "0 auto",
                   // backgroundColor: "red",
                 }}>
-                <Flex align="center" justify="space-between"  gap={8} >
-                  <Typography.Title level={2} style={{ textAlign: "center",margin:'0 0 0 0' }}>
+                <Flex align="center" justify="space-between" gap={8}>
+                  <Typography.Title
+                    level={2}
+                    style={{ textAlign: "center", margin: "0 0 0 0",fontFamily:"sans-serif" }}>
                     $1234
                   </Typography.Title>
                   <div
@@ -313,13 +328,20 @@ export const DashboardPage: React.FC = () => {
                     +12%
                   </Typography.Text>
 
-                  <Typography.Text style={{ fontSize: 13 }}> Yesterday</Typography.Text>
+                  <Typography.Text style={{ fontSize: 13, color: "#9b9897" }}>
+                    {" "}
+                    Yesterday
+                  </Typography.Text>
                 </Flex>
               </CommonCard>
             </Col>
             <Col xl={6} lg={6} md={12} sm={24} xs={24}>
               <CommonCard
-                icon={<UserOutlined  style={{ color: "#158078", fontSize: 14, marginTop: -2 }} />}
+                icon={
+                  <UserOutlined
+                    style={{ color: "white", fontSize: 15, padding: 2 }}
+                  />
+                }
                 title={"Daily Customer"}
                 bodyStyles={{
                   width: "100%",
@@ -327,7 +349,9 @@ export const DashboardPage: React.FC = () => {
                   // backgroundColor: "red",
                 }}>
                 <Flex align="center" justify="space-between" gap={8}>
-                  <Typography.Title level={2} style={{ textAlign: "center" ,margin:'0 0 0 0' }}>
+                  <Typography.Title
+                    level={2}
+                    style={{ textAlign: "center", margin: "0 0 0 0",fontFamily:"sans-serif"  }}>
                     $1432
                   </Typography.Title>
                   <div
@@ -365,14 +389,19 @@ export const DashboardPage: React.FC = () => {
                     +12%
                   </Typography.Text>
 
-                  <Typography.Text style={{ fontSize: 13 }}> Yesterday</Typography.Text>
+                  <Typography.Text style={{ fontSize: 13, color: "#9b9897" }}>
+                    {" "}
+                    Yesterday
+                  </Typography.Text>
                 </Flex>
               </CommonCard>
             </Col>
             <Col xl={6} lg={6} md={12} sm={24} xs={24}>
               <CommonCard
                 icon={
-                  <UserOutlined style={{ color: "#158078", fontSize: 14, marginTop: -2 }} />
+                  <UserOutlined
+                    style={{ color: "white", fontSize: 15, padding: 2 }}
+                  />
                 }
                 title={"Daily Customer"}
                 bodyStyles={{
@@ -382,7 +411,9 @@ export const DashboardPage: React.FC = () => {
                   // backgroundColor: "red",
                 }}>
                 <Flex align="center" justify="space-between" gap={8}>
-                  <Typography.Title level={2} style={{ textAlign: "center",margin:'0 0 0 0' }}>
+                  <Typography.Title
+                    level={2}
+                    style={{ textAlign: "center", margin: "0 0 0 0",fontFamily:"sans-serif" }}>
                     $1432
                   </Typography.Title>
                   <div
@@ -413,9 +444,14 @@ export const DashboardPage: React.FC = () => {
                     }}>
                     +12%
                   </Typography.Text>
-                  <Typography.Text style={{
-                    fontSize: 13
-                  }}> Yesterday</Typography.Text>
+                  <Typography.Text
+                    style={{
+                      fontSize: 13,
+                      color: "#9b9897",
+                    }}>
+                    {" "}
+                    Yesterday
+                  </Typography.Text>
                 </Flex>
               </CommonCard>
             </Col>

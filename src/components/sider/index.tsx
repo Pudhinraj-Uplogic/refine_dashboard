@@ -128,60 +128,60 @@ const Sidebar = () => {
         Title={({ collapsed }) => <Title collapsed={collapsed} />}
         render={({ items, logout, collapsed }) => {
           // console.log("items", items.keys, location.pathname);
-          useEffect(() => {
-            const nonSettingsItems = [];
-            const settingsItems = [];
-            for (let i = 0; i < items.length; i++) {
-              // console.log("items[i].key", items[i].props.resource ,currentResource.identifier);
-              if (items[i].key == "/settings") {
-                settingsItems.push(items[i]);
-              } else {
-                nonSettingsItems.push(items[i]);
-              }
-            }
-            setSitems(settingsItems);
-            setNSitems(nonSettingsItems);
-          }, []);
+          // useEffect(() => {
+          //   const nonSettingsItems = [];
+          //   const settingsItems = [];
+          //   for (let i = 0; i < items.length; i++) {
+          //     // console.log("items[i].key", items[i].props.resource ,currentResource.identifier);
+          //     if (items[i].key == "/settings") {
+          //       settingsItems.push(items[i]);
+          //     } else {
+          //       nonSettingsItems.push(items[i]);
+          //     }
+          //   }
+          //   setSitems(settingsItems);
+          //   setNSitems(nonSettingsItems);
+          // }, []);
           return (
-            <div className="h-full p-0">
-              <div className="w-[100%] flex justify-center text-white text-sm">
-                Menu
-              </div>
-              <div className="w-[100%] flex flex-col items-center  p-2">
-                {nsitems.map((item: any, index: number) => (
-                  <div
-                    key={index}
-                    className={`w-[100%] flex justify-start bg-[]
-                  ${item.props.resource == currentResource.identifier ? "border-l-[6px]  px-4 border-l-[orange] text-[orange]" : "transparent text-[white]"}`
-                  }>
-                    {item}
-                  </div>
-                ))}
-              </div>
-              {nsitems.length > 0 && (
-                <hr
-                  style={{
-                    backgroundColor: "white",
-                    padding: "1px",
-                    margin: "0 auto",
-                    width: "80%",
-                    borderRadius: "2px",
-                  }}
-                />
-              )}
-              <div className="w-[100%] flex flex-col p-4">
-                {sitems.map((item: any, index: number) => (
-                  <div
-                    key={index}
-                    className={`w-[100%] flex justify-center items-center
-                 `}>
-                    {item}
-                  </div>
-                ))}
-              </div>
-              {/* {logout} */}
-            </div>
-            // <>{items}</>
+            // <div className="h-full p-0">
+            //   <div className="w-[100%] flex justify-center text-white text-sm">
+            //     Menu
+            //   </div>
+            //   <div className="w-[100%] flex flex-col items-center  p-2">
+            //     {nsitems.map((item: any, index: number) => (
+            //       <div
+            //         key={index}
+            //         className={`w-[100%] flex justify-start bg-[]
+            //       ${item.props.resource == currentResource.identifier ? "border-l-[6px]  px-4 border-l-[orange] text-[orange]" : "transparent text-[white]"}`
+            //       }>
+            //         {item}
+            //       </div>
+            //     ))}
+            //   </div>
+            //   {nsitems.length > 0 && (
+            //     <hr
+            //       style={{
+            //         backgroundColor: "white",
+            //         padding: "1px",
+            //         margin: "0 auto",
+            //         width: "80%",
+            //         borderRadius: "2px",
+            //       }}
+            //     />
+            //   )}
+            //   <div className="w-[100%] flex flex-col p-4">
+            //     {sitems.map((item: any, index: number) => (
+            //       <div
+            //         key={index}
+            //         className={`w-[100%] flex justify-center items-center
+            //      `}>
+            //         {item}
+            //       </div>
+            //     ))}
+            //   </div>
+            //   {/* {logout} */}
+            // </div>
+            <>{items}</>
           );
         }}
       />
