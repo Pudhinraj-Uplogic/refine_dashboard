@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+aside{
+    background-color: #158078 !important; 
+    border-radius: 10px !important;
+    margin: 0.5% !important;
+}
+
+.ant-layout-has-sider > button {
+    top: 15px !important;
+}
+.ant-layout-sider-children{
+    /* border-radius: 50% !important; */
+    margin-top: 2% !important;
+
+    /* margin-left: 2% !important; */
+    /* padding-left: 2% !important; */
+    /* height: 40vh !important; */
+    /* overflow-x: scroll; */
+    /* background-color: rgb(9, 92, 165) !important; */
+}
+.ant-layout-sider-children > div:nth-child(1){
+    padding: 0 0 !important;
+    width: 100% !important;
+    height: 8vh !important;
+    background-color: #158078 !important;
+    /* color: #fff !important; */
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-top-left-radius: 15px ; 
+    border-top-right-radius: 15px;
+}
+
+.ant-layout-sider-children > ul {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.ant-menu-item::after {
+    right: auto !important;
+    left: 0 !important;
+    /* border: 3px solid rebeccapurple !important; */
+  }
+ 

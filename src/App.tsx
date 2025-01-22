@@ -5,6 +5,7 @@ import {
   useNotificationProvider,
   ThemedLayoutV2,
   ErrorComponent,
+  ThemedSiderV2,
 } from "@refinedev/antd";
 import routerProvider, {
   CatchAllNavigate,
@@ -42,10 +43,13 @@ import { CategoryList } from "./pages/categories";
 import { useTranslation } from "react-i18next";
 import { Header, Title } from "./components";
 import { BikeWhiteIcon } from "./components/icons";
-import { ConfigProvider } from "./context";
+// import { ConfigProvider } from "antd";
 import { useAutoLoginForDemo } from "./hooks";
 
 import "@refinedev/antd/dist/reset.css";
+import Sidebar from "./components/sider";
+import "./App.css";
+import { ConfigProvider } from "./context";
 
 const App: React.FC = () => {
   // This hook is used to automatically login the user.
@@ -67,11 +71,36 @@ const App: React.FC = () => {
     return null;
   }
 
+  const mode = localStorage.getItem("theme");
+
+  console.log("mode", mode)
+
   return (
     <BrowserRouter>
-      <ConfigProvider>
+      <ConfigProvider 
+        theme={
+          {
+            token:{
+              colorPrimary: 'yellow',
+              // fontFamily: 'sans-serif',
+              // colorBgBase: 'red',
+              // colorBgContainer: 'red'
+              fontSize: 14
+            },
+            components:{
+              Layout: {
+                triggerBg:'red'
+                // colorBgBody: 'red',
+                // colorBgContainer: '#FFF8DC',
+              }
+            
+            }
+        }}
+       
+      >
         <RefineKbarProvider>
-          <Refine
+         {/* <div className={`p-2 ${mode == 'dark' ? 'bg-[black]' : 'bg-[white]'}`}> */}
+         <Refine
             routerProvider={routerProvider}
             dataProvider={dataProvider}
             authProvider={authProvider}
@@ -124,12 +153,21 @@ const App: React.FC = () => {
                 },
               },
               {
+                name: "stores d",
+                // list: "/stores",
+                meta: {
+                  icon: <ShopOutlined />,
+                  // parent: "stores d"
+                },
+              },
+              {
                 name: "stores",
                 list: "/stores",
                 create: "/stores/new",
                 edit: "/stores/:id/edit",
                 meta: {
                   icon: <ShopOutlined />,
+                  parent: "stores d"
                 },
               },
               {
@@ -142,6 +180,21 @@ const App: React.FC = () => {
                   icon: <BikeWhiteIcon />,
                 },
               },
+              ,
+              {
+                name: "settings",
+                list: "/stores",
+                create: "/stores/new",
+                edit: "/stores/:id/edit",
+                show: "/stores/:id",
+                meta:{
+                  // icon:
+                  
+                }
+                // meta: {
+                //   // icon:,
+                // },
+              },
             ]}
           >
             <Routes>
@@ -151,21 +204,29 @@ const App: React.FC = () => {
                     key="authenticated-routes"
                     fallback={<CatchAllNavigate to="/login" />}
                   >
-                    <ThemedLayoutV2 Header={Header} Title={Title}>
+                   {/* <div className="p-2">  */}
+                   <ThemedLayoutV2 Header={Header} Title={Title} 
+                    //  Sider={()=> <Sidebar />}
+                    
+                      >
                       <div
                         style={{
                           maxWidth: "1200px",
                           marginLeft: "auto",
                           marginRight: "auto",
+                          // backgroundColor:'red'
                         }}
                       >
                         <Outlet />
                       </div>
                     </ThemedLayoutV2>
+                   {/* </div> */}
                   </Authenticated>
                 }
               >
                 <Route index element={<DashboardPage />} />
+
+                {/* <Route index element={<Sidebar />} /> */}
 
                 <Route path="/orders">
                   <Route index element={<OrderList />} />
@@ -281,6 +342,7 @@ const App: React.FC = () => {
             <DocumentTitleHandler />
             <RefineKbar />
           </Refine>
+         {/* </div> */}
         </RefineKbarProvider>
       </ConfigProvider>
     </BrowserRouter>

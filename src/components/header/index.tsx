@@ -5,9 +5,16 @@ import {
   useGetIdentity,
   useTranslate,
   useList,
+  useResource,
 } from "@refinedev/core";
 import { Link } from "react-router";
-import { SearchOutlined, DownOutlined } from "@ant-design/icons";
+import {
+  SearchOutlined,
+  DownOutlined,
+  ShoppingCartOutlined,
+  BellOutlined,
+  MenuOutlined,
+} from "@ant-design/icons";
 
 import {
   Dropdown,
@@ -23,6 +30,7 @@ import {
   Button,
   theme,
   type MenuProps,
+  Flex,
 } from "antd";
 
 import { useTranslation } from "react-i18next";
@@ -60,6 +68,9 @@ export const Header: React.FC = () => {
   const t = useTranslate();
 
   const currentLocale = locale();
+  const currentResource = useResource();
+
+  console.log("resource ", currentResource);
 
   const renderTitle = (title: string) => (
     <div className={styles.headerTitle}>
@@ -100,8 +111,8 @@ export const Header: React.FC = () => {
             `${item.store.title} / #${item.orderNumber}`,
             item?.products?.[0].images?.[0]?.url ||
               "/images/default-order-img.png",
-            `/orders/show/${item.id}`,
-          ),
+            `/orders/show/${item.id}`
+          )
         );
         if (orderOptionGroup.length > 0) {
           setOptions((prevOptions) => [
@@ -125,7 +136,7 @@ export const Header: React.FC = () => {
       enabled: false,
       onSuccess: (data) => {
         const storeOptionGroup = data.data.map((item) =>
-          renderItem(item.title, "", `/stores/edit/${item.id}`),
+          renderItem(item.title, "", `/stores/edit/${item.id}`)
         );
         if (storeOptionGroup.length > 0) {
           setOptions((prevOptions) => [
@@ -152,8 +163,8 @@ export const Header: React.FC = () => {
           renderItem(
             `${item.name} ${item.surname}`,
             item.avatar[0].url,
-            `/couriers/show/${item.id}`,
-          ),
+            `/couriers/show/${item.id}`
+          )
         );
         if (courierOptionGroup.length > 0) {
           setOptions((prevOptions) => [
@@ -192,16 +203,17 @@ export const Header: React.FC = () => {
     <AntdHeader
       style={{
         backgroundColor: token.colorBgElevated,
-        padding: "0 24px",
-      }}
-    >
+        padding: screens.sm ? "5px 10px" : "10px 32px",
+        margin: '1%',
+        textAlign: "center",
+        // backgroundColor: screens.sm ? "red": "blue"
+      }}>
       <Row
-        align="middle"
+        // align="middle"
         style={{
-          justifyContent: screens.sm ? "space-between" : "end",
-        }}
-      >
-        <Col xs={0} sm={8} md={12}>
+          justifyContent: screens.sm ? "space-between" : "start",
+        }}>
+        {/* <Col xs={0} sm={8} md={12}>
           <AutoComplete
             style={{
               width: "100%",
@@ -218,10 +230,40 @@ export const Header: React.FC = () => {
               prefix={<SearchOutlined className={styles.inputPrefix} />}
             />
           </AutoComplete>
+        </Col> */}
+        <Col xs={10} sm={8} md={12} style={{ backgroundColor: "" }}>
+          <Flex
+            align="center"
+            justify="start"
+            vertical={false}
+            gap={16}
+            style={{ backgroundColor: "" }}>
+            {screens.xl || screens.lg || screens.md ? (
+              <MenuOutlined
+                style={{
+                  fontSize: "20px",
+                  margin: "-6px 0px 0 0",
+                  color: "#158078",
+                  fontWeight: "700",
+                }}
+              />
+            ) : null}
+            <Typography.Title
+              level={5}
+              style={{
+                textAlign: "center",
+                fontSize: screens.sm ? "20px" : "14px",
+                padding: screens.sm ? "10px 12px" : "0 16px",
+                backgroundColor: "",
+                textTransform :"capitalize",
+              }}>
+              {currentResource?.resource?.name}
+            </Typography.Title>
+          </Flex>
         </Col>
-        <Col>
-          <Space size={screens.md ? 32 : 16} align="center">
-            <Dropdown
+        <Col xs={12} sm={16} md={12}>
+          {/* <Space size={screens.md ? 32 : 16} align="center"> */}
+          {/* <Dropdown
               menu={{
                 items: menuItems,
                 selectedKeys: currentLocale ? [currentLocale] : [],
@@ -235,8 +277,12 @@ export const Header: React.FC = () => {
                   <DownOutlined className={styles.languageSwitchIcon} />
                 </Space>
               </Button>
-            </Dropdown>
-
+            </Dropdown> */}
+          {/* <Button
+              className={styles.themeSwitch}
+              type="text"
+              icon={<BellOutlined />}
+            />
             <Button
               className={styles.themeSwitch}
               type="text"
@@ -245,14 +291,79 @@ export const Header: React.FC = () => {
                 setMode(mode === "light" ? "dark" : "light");
               }}
             />
-
-            <Space size={screens.md ? 16 : 8} align="center">
-              <Text ellipsis className={styles.userName}>
-                {user?.name}
-              </Text>
+            <Button
+              className={styles.themeSwitch}
+              type="text"
+              icon={<ShoppingCartOutlined />}
+            />
+            <Space
+              size={screens.md ? 16 : 8}
+              align="center"
+              direction="vertical"
+              style={{ backgroundColor:'yellow' }}
+              >
               <Avatar size="large" src={user?.avatar} alt={user?.name} />
+              <Space size={0}>
+                <Typography.Text>{user?.name}</Typography.Text>
+                <DownOutlined />
+                </Space>
             </Space>
-          </Space>
+          </Space> */}
+
+          <Flex align="center" justify="end" vertical={false} gap={20}>
+            {/* <Flex align="center" gap={20}> */}
+            {screens.md || screens.lg || screens.xl ? (
+              <>
+                <Button
+                  className={styles.themeSwitch}
+                  type="text"
+                  icon={<SearchOutlined />}
+                />
+
+                <Button
+                  className={styles.themeSwitch}
+                  type="text"
+                  icon={<BellOutlined />}
+                />
+
+                <Button
+                  className={styles.themeSwitch} style={{ textAlign : "center" ,backgroundColor:"transparent" }}
+                  type="text"
+                  icon={mode === "light" ? <IconMoon /> : <IconSun />}
+                  onClick={() => {
+                    setMode(mode === "light" ? "dark" : "light");
+                  }}
+                />
+                <Button
+                  className={styles.themeSwitch}
+                  type="text"
+                  icon={<ShoppingCartOutlined />}
+                />
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* </Flex> */}
+            <Flex align="center" gap={5}>
+              <Avatar
+                size={screens.sm ? 50 : "small"}
+                src={user?.avatar}
+                alt={user?.name}
+              />
+              <Flex align="start" vertical={true} gap={2}>
+                <Typography.Text
+                  style={{ fontSize: `${screens.sm ? "16px" : "10px"}` }}>
+                  {user?.name}
+                </Typography.Text>
+                <Typography.Text
+                  style={{ fontSize: `${screens.sm ? "12px" : "8px"}`, }}>
+                  {/* {user?.name} */}
+                  Admin
+                </Typography.Text>
+              </Flex>
+            </Flex>
+          </Flex>
         </Col>
       </Row>
     </AntdHeader>

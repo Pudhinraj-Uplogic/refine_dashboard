@@ -7,7 +7,7 @@ export const CardWithContent = (
     icon?: React.ReactNode;
     title: string;
     bodyStyles?: React.CSSProperties;
-  }>,
+  }>
 ) => {
   const { mode } = useConfigProvider();
 
@@ -28,13 +28,11 @@ export const CardWithContent = (
           <Typography.Text
             style={{
               fontWeight: 400,
-            }}
-          >
+            }}>
             {props.title}
           </Typography.Text>
         </Space>
-      }
-    >
+      }>
       {props.children}
     </Card>
   );
@@ -46,7 +44,7 @@ export const CardWithPlot = (
     title: string;
     rightSlot?: React.ReactNode;
     bodyStyles?: React.CSSProperties;
-  }>,
+  }>
 ) => {
   return (
     <Card
@@ -68,15 +66,64 @@ export const CardWithPlot = (
             <Typography.Text
               style={{
                 fontWeight: 400,
-              }}
-            >
+              }}>
               {props.title}
             </Typography.Text>
           </Flex>
           {props?.rightSlot}
         </Flex>
-      }
-    >
+      }>
+      {props.children}
+    </Card>
+  );
+};
+
+export const CommonCard = (
+  props: PropsWithChildren<{
+    icon?: React.ReactNode;
+    title: string;
+    bodyStyles?: React.CSSProperties;
+  }>
+) => {
+  const { mode } = useConfigProvider();
+
+  return (
+    <Card
+      styles={{
+        header: {
+          backgroundColor: mode === "light" ? "#FAFAFA" : "#1F1F1F",
+          padding: "16px",
+          // border:"none",
+        },
+        body: {
+          ...(props?.bodyStyles || {}),
+        },
+      }}
+      title={
+        // <Space align="center" size={8}>
+        //   {props.icon}
+        //   <Typography.Text
+        //     style={{
+        //       fontWeight: 400,
+        //     }}
+        //   >
+        //     {props.title}
+        //   </Typography.Text>
+        // </Space>
+
+        null
+      }>
+      <Flex align="center" gap={5} justify="start" vertical={false}>
+        {props.icon}
+        <Typography.Text
+        // level={5}
+          style={{
+            fontWeight: 400,
+              // fontSize:"14px"
+          }}>
+          {props.title}
+        </Typography.Text>
+      </Flex>
       {props.children}
     </Card>
   );

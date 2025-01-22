@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { useTranslate } from "@refinedev/core";
-import { Area, type AreaConfig } from "@ant-design/plots";
+import { Area, Line, TinyArea, type AreaConfig  } from "@ant-design/plots";
 import dayjs from "dayjs";
 
 import { useConfigProvider } from "../../../context";
@@ -8,10 +8,11 @@ import { useConfigProvider } from "../../../context";
 type Props = {
   data: AreaConfig["data"];
   height: number;
-  colorCode?: string
+  width: number;
+  colorCode?: string;
 };
 
-export const DailyRevenue = ({ data, height ,colorCode='#158078' }: Props) => {
+export const GeneralCard = ({ data, height , width ,colorCode ='#158078' }: Props) => {
   const t = useTranslate();
   const { mode } = useConfigProvider();
 
@@ -30,17 +31,17 @@ export const DailyRevenue = ({ data, height ,colorCode='#158078' }: Props) => {
       label: {
         formatter: (v) => {
           if (data.length > 7) {
-            return dayjs(v).format("MM/DD");
+            return null;
           }
 
-          return dayjs(v).format("ddd");
+          return null;
         },
       },
     },
     yAxis: {
       label: {
         formatter: (v) => {
-          return `$${Number(v) / 1000}k`;
+          return null
         },
       },
     },
@@ -55,18 +56,35 @@ export const DailyRevenue = ({ data, height ,colorCode='#158078' }: Props) => {
         };
       },
     },
-    theme: mode,
+    // theme: mode,
     areaStyle: () => {
-      return  { fill: `l(270) 0:#fff 1:${colorCode} ` };
+      return { fill: `l(270) 0:#fff 1:${colorCode}`,fillOpacity:0.2 };
+      ;
     },
-    color: () => {
-      return `${colorCode}`;
+    // color: () => {
+    //   // return mode === "dark" ? "#65A9F3" : "#1677FF";
+    
+    // },
+
+    line: {
+      style: {
+        stroke: `${colorCode}`,
+        strokeWidth: 2,
+      },
     },
+   
+    // width:,
   };
+
+
+
 
   return (
     <Suspense>
-      <Area {...config} height={height} />
+      <Area {...config} height={height}  width={width}/>
+
+      {/* <Line {...config} height={height}  width={width}/> */}
+
     </Suspense>
   );
 };
