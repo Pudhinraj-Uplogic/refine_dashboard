@@ -30,6 +30,7 @@ import {
 } from "../../components";
 import {
   ClockCircleOutlined,
+  DollarCircleFilled,
   DollarCircleOutlined,
   DownOutlined,
   LineChartOutlined,
@@ -208,8 +209,7 @@ export const DashboardPage: React.FC = () => {
 
   const tinydata = useMemo(() => {
     return [
-      264, 417, 438, 887, 309, 397, 550, 575, 563, 430, 525, 592, 492, 467, 513,
-      546, 983, 340, 539, 243, 226, 192, 417,
+    5,10,5,10,15,10,15,20,15,25,30,20,25,35,25,30,40,45,50
     ];
   }, [newCustomersData]);
 
@@ -229,11 +229,11 @@ export const DashboardPage: React.FC = () => {
       <Row gutter={[16, 16]}>
         <Col md={24} xl={24}>
           <Row gutter={[10, 10]}>
-            <Col xl={6} lg={6} md={12} sm={24} xs={24}>
+            <Col xl={6} lg={6} md={12} sm={24} xs={24} style={{  }}>
               <CommonCard
                 icon={
-                  <DollarCircleOutlined
-                    style={{ color: "white", fontSize: 15, padding: 2 }}
+                  <DollarCircleFilled
+                    style={{ color: "white", fontSize: 13, padding: 4, backgroundColor:"#43a5e8",borderRadius:"3px" }}
                   />
                 }
                 title={t("dashboard.dailyRevenue.title")}
@@ -280,16 +280,16 @@ export const DashboardPage: React.FC = () => {
 
                   <Typography.Text style={{ fontSize: 13, color: "#9b9897" }}>
                     {" "}
-                    Yesterday
+                    yesterday
                   </Typography.Text>
                 </Flex>
               </CommonCard>
             </Col>
-            <Col xl={6} lg={6} md={12} sm={24} xs={24}>
+            <Col xl={6} lg={6} md={12} sm={24} xs={24} style={{ }}>
               <CommonCard
                 icon={
-                  <DollarCircleOutlined
-                    style={{ color: "white", fontSize: 15, padding: 2 }}
+                  <DollarCircleFilled
+                  style={{ color: "white", fontSize: 13, padding: 4, backgroundColor:"#43a5e8",borderRadius:"3px" }}
                   />
                 }
                 title={t("dashboard.dailyRevenue.title")}
@@ -330,16 +330,16 @@ export const DashboardPage: React.FC = () => {
 
                   <Typography.Text style={{ fontSize: 13, color: "#9b9897" }}>
                     {" "}
-                    Yesterday
+                    yesterday
                   </Typography.Text>
                 </Flex>
               </CommonCard>
             </Col>
-            <Col xl={6} lg={6} md={12} sm={24} xs={24}>
+            <Col xl={6} lg={6} md={12} sm={24} xs={24} style={{ }}>
               <CommonCard
                 icon={
                   <UserOutlined
-                    style={{ color: "white", fontSize: 15, padding: 2 }}
+                  style={{ color: "white", fontSize: 13, padding: 4, backgroundColor:"#43a5e8",borderRadius:"3px" }}
                   />
                 }
                 title={"Daily Customer"}
@@ -391,16 +391,16 @@ export const DashboardPage: React.FC = () => {
 
                   <Typography.Text style={{ fontSize: 13, color: "#9b9897" }}>
                     {" "}
-                    Yesterday
+                    yesterday
                   </Typography.Text>
                 </Flex>
               </CommonCard>
             </Col>
-            <Col xl={6} lg={6} md={12} sm={24} xs={24}>
+            <Col xl={6} lg={6} md={12} sm={24} xs={24} style={{ }}>
               <CommonCard
                 icon={
                   <UserOutlined
-                    style={{ color: "white", fontSize: 15, padding: 2 }}
+                  style={{ color: "white", fontSize: 13, padding: 4, backgroundColor:"#43a5e8",borderRadius:"3px" }}
                   />
                 }
                 title={"Daily Customer"}
@@ -450,7 +450,7 @@ export const DashboardPage: React.FC = () => {
                       color: "#9b9897",
                     }}>
                     {" "}
-                    Yesterday
+                    yesterday
                   </Typography.Text>
                 </Flex>
               </CommonCard>
@@ -625,6 +625,7 @@ export const DashboardPage: React.FC = () => {
           </Col> */}
             <Col xl={12} lg={12} md={24} sm={24} xs={24}>
               <CardWithPlot
+              
                 icon={
                   // <DollarCircleOutlined
                   //   style={{
@@ -635,23 +636,30 @@ export const DashboardPage: React.FC = () => {
                   ""
                 }
                 title={t("dashboard.dailyRevenue.title")}
-                rightSlot={
-                  <Flex align="center" gap={8}>
-                    <NumberField
-                      value={revenue.trend}
-                      options={{
-                        style: "currency",
-                        currency: "USD",
-                      }}
-                    />
-                    {revenue.trend > 0 ? <TrendUpIcon /> : <TrendDownIcon />}
-                  </Flex>
-                }>
+                // rightSlot={
+                //   <Flex align="center" gap={8}>
+                //     <NumberField
+                //       value={revenue.trend}
+                //       options={{
+                //         style: "currency",
+                //         currency: "USD",
+                //       }}
+                //     />
+                //     {revenue.trend > 0 ? <TrendUpIcon /> : <TrendDownIcon />}
+                //   </Flex>
+                // }
+                >
                 <DailyRevenue
                   height={200}
                   data={revenue.data}
                   colorCode="#ffc355"
                 />
+                 {/* <TinyFormatCard
+                      data={tinydata}
+                      height={200}
+                      width={50}
+                      colorCode="#158078"
+                    /> */}
               </CardWithPlot>
             </Col>
 

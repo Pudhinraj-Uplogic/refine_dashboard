@@ -5,7 +5,8 @@
 aside{
     background-color: #158078 !important; 
     border-radius: 10px !important;
-    margin: 0.5% !important;
+    margin-top: 1% !important;
+    margin-left: 1% !important;
 }
 
 .ant-layout-has-sider > button {
@@ -15,7 +16,7 @@ aside{
     /* border-radius: 50% !important; */
     margin-top: 2% !important;
 
-    /* margin-left: 2% !important; */
+    /* margin-left: % !important; */
     /* padding-left: 2% !important; */
     /* height: 40vh !important; */
     /* overflow-x: scroll; */
@@ -50,3 +51,22 @@ aside{
     border: 3px solid #fbc901 !important;
   }
  
+  .ant-layout-content > div{
+    /* background-color: red !important; */
+    padding: 24px !important;
+    padding-top: 0px !important;
+    padding-left: 15px !important;
+  }
+  .ant-card-bordered {
+    /* border: none !important; */
+  }
+
+    #common-cards{
+        border: none !important;
+        border-radius: 15px !important;
+    }
+
+    #card-with-plot{
+        border: none !important;
+        border-radius: 15px !important;
+    }

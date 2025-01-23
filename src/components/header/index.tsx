@@ -216,9 +216,11 @@ export const Header: React.FC = () => {
   return (
     <AntdHeader
       style={{
-        backgroundColor: mode === "light" ? "#FAFAF2" : "black",
+        // backgroundColor: "red",
         padding: screens.sm ? "5px 10px" : "10px 32px",
-        margin: "1%",
+        // margin: "1%",
+        marginLeft: "0%",
+        marginRight: "0.5%",
         textAlign: "center",
         // backgroundColor: screens.sm ? "red": "blue"
       }}>

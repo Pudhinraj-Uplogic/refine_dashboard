@@ -193,9 +193,10 @@ const App: React.FC = () => {
                       >
                       <div
                         style={{
-                          maxWidth: "1200px",
+                          width: "100%",
                           marginLeft: "auto",
                           marginRight: "auto",
+                          // padding: "16px",
                           // backgroundColor:'red'
                         }}
                       >

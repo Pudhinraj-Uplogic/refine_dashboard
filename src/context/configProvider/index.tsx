@@ -62,7 +62,10 @@ export const ConfigProvider = ({
             colorBgLayout: mode =="dark" ? "black" :" #fafaf2"
           },
           components:{
-            
+            Layout:{
+              // bodyBg:"red",
+              headerBg:mode =="dark" ? "black" :" #fafaf2"
+            },
             Menu:{
               // radiusItem:100,
               itemColor:  "#9bbfbc",
@@ -98,7 +101,8 @@ export const ConfigProvider = ({
             },
             Card:{
               // colorBgContainer:"red"
-
+              colorBorder:"red",
+              colorFill:"red"
             },
             Table:{
               // headerColor:"red",

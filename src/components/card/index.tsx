@@ -47,7 +47,8 @@ export const CardWithPlot = (
   }>
 ) => {
   return (
-    <Card
+    <Card 
+    id="card-with-plot"
       styles={{
         header: {
           padding: "16px 16px 10px 16px",
@@ -88,16 +89,18 @@ export const CommonCard = (
   const { mode } = useConfigProvider();
 
   return (
-    <Card
+    <Card id="common-cards"
       styles={{
         header: {
           backgroundColor: mode === "light" ? "#FAFAFA" : "#1F1F1F",
           // padding: "16px",
-          // border:"none",
+          border:"none !important",
           // borderRadius: "50px",
         },
         body: {
-          borderRadius: "10px",
+          border: "none !important",
+          // padding:'1%',
+          // borderRadius: "100px",
           // boxShadow: `2px 4px 4px ${
           //   mode === "light" ? "rgba(0, 0, 0, 0.25)" : "rgba(0, 0, 0, 0.25)"
           // }`,
@@ -119,22 +122,24 @@ export const CommonCard = (
         null
       }>
       <Flex align="center" gap={5} justify="start" vertical={false}>
-        <Space
+        {/* <Space
           size={8}
           style={{
             backgroundColor: "#43a5e8",
             padding: "2px",
             borderRadius: "10%",
             
-          }}>
+          }}> */}
           {props.icon}
-        </Space>
+        {/* </Space> */}
         <Typography.Text
           type="secondary"
           // level={5}
           style={{
-            fontWeight: 400,
+            fontWeight:500,
+            fontSize: "13px",
             color: "#9b9897",
+            textTransform: "uppercase",
             // fontSize:"14px"
           }}>
           {props.title}
