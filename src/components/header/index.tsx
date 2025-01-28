@@ -75,7 +75,7 @@ export const Header: React.FC = () => {
 
   const collapse = useContext(ThemedLayoutContext);
 
-  console.log("collapse", collapse);
+  // console.log("collapse", collapse);
 
   const handleCollapse = () => {
     collapse.setSiderCollapsed(!collapse.siderCollapsed);
@@ -84,7 +84,7 @@ export const Header: React.FC = () => {
   const currentLocale = locale();
   const currentResource = useResource();
 
-  console.log("resource ", currentResource);
+  // console.log("resource ", currentResource);
 
   const renderTitle = (title: string) => (
     <div className={styles.headerTitle}>
