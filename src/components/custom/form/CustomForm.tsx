@@ -1,26 +1,22 @@
-import { UserOutlined } from "@ant-design/icons";
+import { LeftOutlined, UserOutlined } from "@ant-design/icons";
 import { ListButton, SaveButton, useDrawerForm } from "@refinedev/antd";
-import {
-  Card,
-  Flex,
-  Form,
-} from "antd";
+import { Card, Col, Divider, Flex, Form, Row } from "antd";
 import FormTemplate from "./FormTemplate";
 
-type Props = {
-  formItem: any[],
-  resource: string,
-  action: any,
-  disableForm?: boolean,
-  disableEdit?: boolean,
-  disableDelete?: boolean,
-  redirect?: string,
-}
+import type { FormProps } from "./types.form"
 
-
-const CustomForm = (props:Props) => {
-
-  const { disableForm, disableEdit, disableDelete, formItem,resource, action,redirect } = props
+const CustomForm = (props: FormProps) => {
+  const {
+    disableForm,
+    disableEdit,
+    disableDelete,
+    formItem,
+    resource,
+    action,
+    redirect,
+    isModal,
+    title
+  } = props;
 
   const { drawerProps, formProps, close, saveButtonProps, formLoading } =
     useDrawerForm<any>({
@@ -47,21 +43,41 @@ const CustomForm = (props:Props) => {
     // after that formProps onFinish func will be called
   };
 
+  console.log('forms',formProps)
+
   return (
-    <Form {...formProps}>
-      <Card>
-        {
-          props.formItem.map((item:any, index:number) => {
-            return (
-              <>
-              <FormTemplate item={item} key={index} />
-              {/* <FormTemplate item={item} key={index} /> */}
-              </>
-            )
-          })
-        }
-      </Card>
-      {!disableForm && (
+    <>
+    {
+      !isModal && 
+      (
+        <>
+        <Flex>
+        <ListButton icon={<LeftOutlined />}>{title}</ListButton>
+      </Flex>
+      <Divider />
+        </>
+      )
+    }
+      
+
+      <Form {...formProps}>
+        <Card>
+          <Row gutter={24}>
+            {props.formItem.map((item: any, index: number) => {
+              return (
+                <Col
+                  key={index}
+                  sm={item && item.row ? 12 : 24}
+                  // md={item && item.row ? 8 : 24}
+
+                  style={{ width: "100%" }}>
+                  <FormTemplate item={item} key={index} />
+                </Col>
+              );
+            })}
+          </Row>
+        </Card>
+        {!disableForm && (
           <Flex
             align="center"
             justify="space-between"
@@ -73,14 +89,14 @@ const CustomForm = (props:Props) => {
               <SaveButton
                 style={{ backgroundColor: "" }}
                 onClick={handleSubmit}
-                disabled={formLoading}
-                >
+                disabled={formLoading}>
                 Save
               </SaveButton>
             </>
           </Flex>
         )}
-    </Form>
+      </Form>
+    </>
   );
 };
 

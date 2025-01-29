@@ -10,23 +10,26 @@ const FormTemplate = ({ item }: { item: FormItems }) => {
     padding: "10px 10px",
     width: "100%",
     height: "100%",
+    // margin:'1%'
   };
+  // console.log("screens", screens);
   const childStyle = {
-    // backgroundColor: screens.sm || screens.md  ? "yellow" : "blue",
-    width: screens.sm || screens.md ? "25%" : "100%",
+    // backgroundColor: screens.xl  ? "yellow" : "blue",
+    width: screens.xl ? "50%" : "100%",
   };
 
-  const { icon, label } = item;
+  const { icon, label,required } = item;
   return (
       <Flex
         gap={8}
         justify="space-evenly"
-        align="start"
-        vertical={!screens.sm}
+        align={"center"}
+        vertical={!screens.xl}
         style={parentStyle}>
         <Flex gap={4} align="center" style={childStyle}>
           <span>{icon}</span>
           <Typography.Text>{label}</Typography.Text>
+          {required ? <sup className="text-[red]">*</sup> : null}
         </Flex>
         <RenderFormItem Feild={item} />
       </Flex>

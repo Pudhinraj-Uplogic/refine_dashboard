@@ -240,11 +240,39 @@ const App: React.FC = () => {
                   <Route path=":id/edit" element={<ProductEdit />} />
                 </Route>
 
+
+
                 <Route path="/stores">
+                  <Route
+                    path=""
+                    element={
+                      <StoreList>
+                        <Outlet />
+                      </StoreList>
+                    }
+                  >
+                    <Route path="new" element={<StoreCreate />} />
+                  </Route>
+
+                  <Route path=":id/edit" element={<StoreEdit />} />
+                </Route>
+              {/* </Route> */}
+
+                {/* <Route path="/stores">
+                <Route
+                    path=""
+                    element={
+                      <StoreList>
+                        <Outlet />
+                      </StoreList>
+                    }
+                  >
+                    <Route path="new" element={<StoreCreate />} />
+                  </Route>
                   <Route index element={<StoreList />} />
                   <Route path="new" element={<StoreCreate />} />
                   <Route path=":id/edit" element={<StoreEdit />} />
-                </Route>
+                </Route> */}
 
                 <Route path="/categories" element={<CategoryList />} />
 

@@ -1,14 +1,15 @@
 import { CreateButton, List } from "@refinedev/antd";
 
 import { AllStoresMap, StoreListTable } from "../../components";
-import { Flex, Segmented } from "antd";
+import { Button, Flex, Segmented } from "antd";
 import { useState } from "react";
-import { useTranslate } from "@refinedev/core";
+import { useGo, useNavigation, useTranslate } from "@refinedev/core";
 import { EnvironmentOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import { useLocation } from "react-router";
 
 type View = "table" | "map";
 
-export const StoreList = () => {
+export const StoreList = ({ children }: any) => {
   const [view, setView] = useState<View>(
     (localStorage.getItem("store-view") as View) || "table",
   );
@@ -19,6 +20,9 @@ export const StoreList = () => {
   };
 
   const t = useTranslate();
+  const go = useGo();
+  const { pathname } = useLocation();
+  const { createUrl } = useNavigation();
 
   return (
     <>
@@ -47,6 +51,30 @@ export const StoreList = () => {
           <CreateButton {...props.createButtonProps} key="create" size="large">
             {t("stores.addNewStore")}
           </CreateButton>,
+
+          // <CreateButton {...props.createButtonProps} key="create" size="large">
+          //   {t("stores.addNewStore")}
+          // </CreateButton>
+        //   <CreateButton
+        //   {...props.createButtonProps}
+        //   key="create"
+        //   size="large"
+        //   onClick={() => {
+        //     return go({
+        //       to: `${createUrl("stores")}`,
+        //       query: {
+        //         to: pathname,
+        //       },
+        //       options: {
+        //         keepQuery: true,
+        //       },
+        //       type: "replace",
+        //     });
+        //   }}
+        // >
+        //   {t("stores.addNewStore")}
+        // </CreateButton>,
+          ,
         ]}
       >
         {view === "table" && <StoreListTable />}
@@ -61,6 +89,7 @@ export const StoreList = () => {
           </Flex>
         )}
       </List>
+      {children}
     </>
   );
 };

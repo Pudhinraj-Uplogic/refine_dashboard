@@ -113,6 +113,9 @@ export const ConfigProvider = ({
                 // colorBgContainer:"red",
                 // colorBgLayout:"blue",
                 // colorPrimaryBorder:"yellow"
+            },
+            Modal:{
+              
             }
           }
         }}

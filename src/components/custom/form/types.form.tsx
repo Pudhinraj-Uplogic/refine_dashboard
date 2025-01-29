@@ -9,3 +9,16 @@ export type FormItems = {
     required: boolean;
     options ?: [] | any;
 };
+
+export interface FormProps {
+    formItem: any[];
+    resource: string;
+    action: any;
+    disableForm?: boolean;
+    disableEdit?: boolean;
+    disableDelete?: boolean;
+    redirect?: string;
+    grid?: any[];
+    title?: string;
+    isModal?: boolean;
+  };
