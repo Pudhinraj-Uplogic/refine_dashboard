@@ -50,6 +50,7 @@ import "@refinedev/antd/dist/reset.css";
 import Sidebar from "./components/sider";
 import "./App.css";
 import { ConfigProvider } from "./context";
+import { FormProvider } from "./context/FormProvider";
 
 const App: React.FC = () => {
   // This hook is used to automatically login the user.
@@ -77,6 +78,7 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
+    <FormProvider>
       <ConfigProvider  
       >
         <RefineKbarProvider>
@@ -356,6 +358,7 @@ const App: React.FC = () => {
          {/* </div> */}
         </RefineKbarProvider>
       </ConfigProvider>
+      </FormProvider>
     </BrowserRouter>
   );
 };

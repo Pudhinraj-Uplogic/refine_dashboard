@@ -1,6 +1,6 @@
 import { useGo } from "@refinedev/core";
 import { Grid, Modal } from "antd";
-import CustomForm from "./CustomForm";
+import FormComponent from "./FormComponent";
 import type { FormProps } from "./types.form";
 const CustomFormModal = (props: FormProps) => {
   const go = useGo();
@@ -18,8 +18,8 @@ const CustomFormModal = (props: FormProps) => {
 
   return (
     <Modal
-      width={screens.xl ? "80%" : "80%"}
-      height={screens.xl ? "60%" : "90%"}
+      width={screens.xl ? "70%" : "80%"}
+      // height={screens.xl ? "80%" : "90%"}
       open={true}
       centered={true}
       onCancel={handleModalClose}
@@ -46,7 +46,7 @@ const CustomFormModal = (props: FormProps) => {
       }}
       footer={null}
       >
-      <CustomForm {...props} />
+      <FormComponent {...props} />
     </Modal>
   );
 };

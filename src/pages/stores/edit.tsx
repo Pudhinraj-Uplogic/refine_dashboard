@@ -5,6 +5,8 @@ import { LeftOutlined, UserOutlined } from "@ant-design/icons";
 import { StoreForm } from "../../components";
 import _debounce from "lodash/debounce";
 import CustomForm from "../../components/custom/form/CustomForm";
+import { useEffect, useState } from "react";
+import { useFormProvider } from "../../context/FormProvider";
 
 export const StoreEdit = () => {
   const t = useTranslate();
@@ -113,6 +115,50 @@ export const StoreEdit = () => {
   //     required: true,
   //   },
   // ];
+
+
+  const { getSelectOption,  setSelectOption }= useFormProvider();
+
+    console.log("getSelectOption", getSelectOption);
+
+const [chdriver,setChDriver] = useState<any>([])
+  const array = [
+    {
+      id:1,
+      arry:[
+        {label:"d1",value:1},
+        {label:"d2",value:2},
+        {label:"d3",value:3}
+      ]
+    },
+    {
+      id:2,
+      arry:[
+        {label:"d4",value:1},
+        {label:"d5",value:2},
+        {label:"d6",value:3}
+      ]
+    },
+    {
+      id:3,
+      arry:[
+        {label:"d7",value:1},
+        {label:"d8",value:2},
+        // {label:"d9",value:3}
+      ]
+    }
+  ]
+
+  useEffect(()=>{
+    const newArray = array.filter((item)=>{
+      if (item.id === getSelectOption) {
+        return item
+      } 
+    })
+    console.log("newArray",newArray[0].arry);
+    setChDriver(newArray[0].arry)
+  },[getSelectOption])
+
 
   const formItem = [
     {
@@ -252,6 +298,45 @@ export const StoreEdit = () => {
       required: true,
       row:true,
       options:categorySelectProps?.options
+    },
+    {
+      name: 'drivers',
+      label: "drivers",
+      icon: <UserOutlined />,
+      rules: [
+        {
+          required: true,
+          message: "Please enter the Field",
+        },
+      ],
+      type: "CustomSelect",
+      placeholder: "eg. select Drivers",
+      initialValue: "",
+      required: true,
+      // row:true,
+      options:[
+        {label:"Driver 1",value:1},
+        {label:"Driver 2",value:2},
+        {label:"Driver 3",value:3},
+      ]
+    },
+    
+    {
+      name: 'chdrivers',
+      label: "Ch Drivers",
+      icon: <UserOutlined />,
+      rules: [
+        {
+          required: true,
+          message: "Please enter the Field",
+        },
+      ],
+      type: "subSelect",
+      placeholder: "eg. select Drivers",
+      initialValue: "",
+      required: true,
+      // row:true,
+      options:chdriver
     },
     {
       name: 'createdeAt',

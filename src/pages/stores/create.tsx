@@ -1,8 +1,9 @@
 import {   useTranslate } from "@refinedev/core";
 import { LeftOutlined, UserOutlined } from "@ant-design/icons";
-import CustomFormModal from "../../components/custom/form/CustomFormModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelect } from "@refinedev/antd";
+import CustomForm from "../../components/custom/form/CustomForm";
+import { useFormProvider } from "../../context/FormProvider";
 
 export const StoreCreate = () => {
   const t = useTranslate();
@@ -24,6 +25,56 @@ export const StoreCreate = () => {
     });
   
     console.log("productSelectProps", productSelectProps.options);
+
+    const { getSelectOption,  setSelectOption, getEmpty }= useFormProvider();
+
+    console.log("getSelectOption", getSelectOption);
+
+const [chdriver,setChDriver] = useState<any>([])
+  const array = [
+    {
+      id:1,
+      arry:[
+        {label:"d1",value:1},
+        {label:"d2",value:2},
+        {label:"d3",value:3}
+      ]
+    },
+    {
+      id:2,
+      arry:[
+        {label:"d4",value:1},
+        {label:"d5",value:2},
+        {label:"d6",value:3}
+      ]
+    },
+    {
+      id:3,
+      arry:[
+        {label:"d7",value:1},
+        {label:"d8",value:2},
+        // {label:"d9",value:3}
+      ]
+    }
+  ]
+
+
+  useEffect(()=>{
+    setSelectOption(2)
+  },[])
+
+  useEffect(()=>{
+    const newArray = array.filter((item)=>{
+      if (item.id === getSelectOption) {
+        return item
+      } 
+    })
+    console.log("newArray",newArray[0].arry);
+    setChDriver(newArray[0].arry)
+  },[getSelectOption])
+
+
+
 
   const formItem = [
     {
@@ -141,10 +192,10 @@ export const StoreCreate = () => {
         },
       ],
       type: "mulitpleSelect",
-      placeholder: "eg. no-1, street-1, city-1",
+      placeholder: "eg. Select Products",
       initialValue: "",
       required: true,
-      row:true,
+      // row:true,
       options:productSelectProps.options
     },
     {
@@ -161,10 +212,49 @@ export const StoreCreate = () => {
       placeholder: "eg. select Categories",
       initialValue: "",
       required: true,
-      row:true,
+      // row:true,
       options:categorySelectProps?.options
     },
-    ,
+
+    {
+      name: 'drivers',
+      label: "drivers",
+      icon: <UserOutlined />,
+      rules: [
+        {
+          required: true,
+          message: "Please enter the Field",
+        },
+      ],
+      type: "CustomSelect",
+      placeholder: "eg. select Drivers",
+      initialValue: "",
+      required: true,
+      // row:true,
+      options:[
+        {label:"Driver 1",value:1},
+        {label:"Driver 2",value:2},
+        {label:"Driver 3",value:3},
+      ]
+    },
+    
+    {
+      name: 'chdrivers',
+      label: "Ch Drivers",
+      icon: <UserOutlined />,
+      rules: [
+        {
+          required: true,
+          message: "Please enter the Field",
+        },
+      ],
+      type: "subSelect",
+      placeholder: "eg. select Drivers",
+      initialValue:'',
+      required: true,
+      // row:true,
+      options:chdriver
+    },
     {
       name: 'createdeAt',
       label: "Created At",
@@ -184,6 +274,9 @@ export const StoreCreate = () => {
     },
   ];
 
+
+
+
   const datas = {
     formItem: formItem,
     resource: "stores",
@@ -196,6 +289,6 @@ export const StoreCreate = () => {
   }
 
   return (
-     <CustomFormModal  {...datas}  />
+     <CustomForm  {...datas}  />
   );
 };

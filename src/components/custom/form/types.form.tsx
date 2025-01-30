@@ -8,6 +8,7 @@ export type FormItems = {
     initialValue: string;
     required: boolean;
     options ?: [] | any;
+    row?:boolean;
 };
 
 export interface FormProps {
