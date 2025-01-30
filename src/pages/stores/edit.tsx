@@ -339,6 +339,23 @@ const [chdriver,setChDriver] = useState<any>([])
       options:chdriver
     },
     {
+      name: 'password',
+      label: "Password",
+      icon: <UserOutlined />,
+      rules: [
+        {
+          required: true,
+          message: "Please enter the Field",
+        },
+      ],
+      type: "password",
+      placeholder: "Enter the Password",
+      initialValue: "",
+      required: true,
+      // row:true,
+      // options:chdriver
+    },
+    {
       name: 'createdeAt',
       label: "Created At",
       icon: <UserOutlined />,

@@ -1,3 +1,5 @@
+import { extend } from "lodash";
+
 export type FormItems = {
     icon: React.ReactNode;
     label: string;
@@ -11,7 +13,12 @@ export type FormItems = {
     row?:boolean;
 };
 
-export interface FormProps {
+export type FooterButtonProps = { 
+    handleSubmit ?: ()=>void;
+    formLoading ?: boolean
+}
+
+export interface FormProps extends FooterButtonProps {
     formItem: any[];
     resource: string;
     action: any;

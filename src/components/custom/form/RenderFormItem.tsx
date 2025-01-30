@@ -6,15 +6,13 @@ import { useFormProvider } from "../../../context/FormProvider";
 import { set } from "lodash";
 
 const RenderFormItem = (props: any) => {
-
-
-
-  const { getSelectOption,  setSelectOption, setEmpty ,getEmpty }= useFormProvider();
+  const { getSelectOption, setSelectOption, setEmpty, getEmpty } =
+    useFormProvider();
 
   console.log("getSelectOption", getSelectOption);
 
   const renderFields = (formItem: any) => {
-  const { type, name, initialValue, rules, options, disabled, placeholder } =
+    const { type, name, initialValue, rules, options, disabled, placeholder } =
       formItem;
     switch (type) {
       case "text":
@@ -25,6 +23,52 @@ const RenderFormItem = (props: any) => {
             name={name}
             rules={rules}>
             <Input placeholder={placeholder} disabled={disabled} />
+          </Form.Item>
+        );
+      case "password":
+        return (
+          <Form.Item
+            style={{ width: "100%", padding: "0", margin: "0" }}
+            initialValue={initialValue}
+            name={name}
+            rules={rules}>
+            <Input.Password placeholder={placeholder} disabled={disabled} />
+          </Form.Item>
+        );
+      case "numberOnly":
+       
+        if(rules){
+          const rulesNumberOnly = rules?.map((rule: any) => {
+            return {
+              ...rule,
+              pattern: /^[0-9]*$/,
+              message: "Only numbers are allowed",
+            };
+          });
+  
+          console.log("rulesNumberOnly", rulesNumberOnly);
+        }
+        const rulesNumberOnly = [
+          {
+            pattern: /^[0-9]*$/,
+            message: "Only numbers are allowed",
+          }
+        ]
+
+        return (
+          <Form.Item
+            style={{ width: "100%", padding: "0", margin: "0" }}
+            initialValue={initialValue}
+            name={name}
+            rules={rulesNumberOnly}>
+            <Input
+              placeholder={placeholder}
+              disabled={disabled}
+              onChange={(e) => {
+                const value = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+                return value; 
+              }}
+            />
           </Form.Item>
         );
       case "segment":
@@ -41,92 +85,102 @@ const RenderFormItem = (props: any) => {
             />
           </Form.Item>
         );
-        case "select":
-          console.log("options", options, initialValue);
+      case "select":
+        // console.log("options", options, initialValue);
         return (
           <Form.Item
             style={{ width: "100%", padding: "0", margin: "0" }}
             initialValue={initialValue ? initialValue : null}
             name={name}
             rules={rules}
-            
-            getValueProps={(value) => ({ value: value ? value : null })}
-            >
-            <Select options={options} placeholder={placeholder} disabled={disabled} />
+            getValueProps={(value) => ({ value: value ? value : null })}>
+            <Select
+              options={options}
+              placeholder={placeholder}
+              disabled={disabled}
+            />
           </Form.Item>
         );
-        case "CustomSelect":
-          // console.log("options", options);
+      case "CustomSelect":
+        // console.log("options", options);
         return (
           <Form.Item
             style={{ width: "100%", padding: "0", margin: "0" }}
             initialValue={initialValue ? initialValue : null}
             name={name}
             rules={rules}>
-            <Select options={options} placeholder={placeholder}
-             disabled={disabled} 
-             onChange={(value) => {
-              // console.log("value", value);
+            <Select
+              options={options}
+              placeholder={placeholder}
+              disabled={disabled}
+              onChange={(value) => {
+                // console.log("value", value);
 
-               setSelectOption(value);
-               setEmpty(false)
-             }}
-             />
+                setSelectOption(value);
+                setEmpty(false);
+              }}
+            />
           </Form.Item>
         );
-        case "subSelect":
-          console.log("options  fdg", options, initialValue,getEmpty);
-
-
-
+      case "subSelect":
+        // console.log("options  fdg", options, initialValue,getEmpty);
         return (
           <Form.Item
             style={{ width: "100%", padding: "0", margin: "0" }}
             initialValue={initialValue ? initialValue : null}
             name={name}
             rules={rules}
-            getValueProps={(value) => ({ value: value ? !getEmpty ? initialValue : value : null })}
-            >
-            <Select options={options} placeholder={placeholder}
-             disabled={disabled} 
-             onChange={(value) => { 
-              // console.log("value", value);
-              //  setSelectOption(value);
-               setEmpty(true)
-             }}
-             />
+            getValueProps={(value) => ({
+              value: value ? (!getEmpty ? initialValue : value) : null,
+            })}>
+            <Select
+              options={options}
+              placeholder={placeholder}
+              disabled={disabled}
+              onChange={(value) => {
+                // console.log("value", value);
+                //  setSelectOption(value);
+                setEmpty(true);
+              }}
+            />
           </Form.Item>
         );
-        case "mulitpleSelect":
+      case "mulitpleSelect":
         return (
           <Form.Item
             style={{ width: "100%", padding: "0", margin: "0" }}
             initialValue={initialValue ? initialValue : null}
             name={name}
             rules={rules}>
-            <Select mode="multiple" options={options} placeholder={placeholder} disabled={disabled} />
+            <Select
+              mode="multiple"
+              options={options}
+              placeholder={placeholder}
+              disabled={disabled}
+            />
           </Form.Item>
         );
-        case "date":
-          return (
-            <Form.Item
-              style={{ width: "100%", padding: "0", margin: "0" }}
-              initialValue={initialValue ? dayjs(initialValue) : null}
-              name={name}
-              getValueProps={(value) => ({ value: value ? dayjs(value) : null })}
-              rules={rules}>
-                <DatePicker placeholder={placeholder} disabled={disabled}  format="YYYY-MM-DD" />
-            </Form.Item>
-          );
+      case "date":
+        return (
+          <Form.Item
+            style={{ width: "100%", padding: "0", margin: "0", }}
+            initialValue={initialValue ? dayjs(initialValue) : null}
+            name={name}
+            getValueProps={(value) => ({ value: value ? dayjs(value) : null })}
+            rules={rules}>
+            <DatePicker
+              placeholder={placeholder}
+              disabled={disabled}
+              format="YYYY-MM-DD"
+              style={{ width: "100%" }}
+            />
+          </Form.Item>
+        );
       default:
         return null;
     }
-  }  
-  return (
-    <>
-      {renderFields(props)}
-    </>
-  );
+  };
+  return <>{renderFields(props)}</>;
 };
 
 export default RenderFormItem;

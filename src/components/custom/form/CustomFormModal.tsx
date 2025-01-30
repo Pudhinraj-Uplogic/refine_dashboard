@@ -2,10 +2,14 @@ import { useGo } from "@refinedev/core";
 import { Grid, Modal } from "antd";
 import FormComponent from "./FormComponent";
 import type { FormProps } from "./types.form";
-const CustomFormModal = (props: FormProps) => {
+import { useDrawerForm } from "@refinedev/antd";
+import { FooterButton } from "./FormButton";
+const CustomFormModal = (
+  props:FormProps
+) => {
   const go = useGo();
 
-  const { resource , title } = props
+  const { resource, title, action,handleSubmit,formLoading } = props;
   const handleModalClose = () => {
     console.log("handleModalClose");
     go({
@@ -13,8 +17,33 @@ const CustomFormModal = (props: FormProps) => {
     });
   };
 
-  const { useBreakpoint} = Grid;
+  const { useBreakpoint } = Grid;
   const screens = useBreakpoint();
+
+  // const { drawerProps, formProps, close, saveButtonProps, formLoading } =
+  //   useDrawerForm<any>({
+  //     resource: resource,
+  //     // id: props?.id, // when undefined, id will be read from the URL.
+  //     action: action,
+  //     // redirect: false,
+  //     redirect: "list",
+  //     onMutationSuccess: () => {
+  //       // props.onMutationSuccess?.();
+  //       console.log("success");
+  //     },
+  //   });
+
+  // const handleSubmit = () => {
+  //   // console.log("clicked", formLoading);
+  //   console.log("formProps", formProps.form?.getFieldsValue());
+  //   formProps.form?.validateFields().then((values) => {
+  //     console.log("values", values);
+  //     formProps.onFinish?.(values);
+  //   });
+
+  //   // formProps validation function validate the form data with the rules
+  //   // after that formProps onFinish func will be called
+  // };
 
   return (
     <Modal
@@ -26,7 +55,7 @@ const CustomFormModal = (props: FormProps) => {
       destroyOnClose
       maskClosable={false}
       title={title}
-      style={{backgroundColor:"transparent"}}
+      style={{ backgroundColor: "transparent" }}
       styles={{
         header: {
           padding: "20px 24px",
@@ -37,15 +66,22 @@ const CustomFormModal = (props: FormProps) => {
         },
         content: {
           padding: 0,
-        //   backgroundColor:"red",
+          // backgroundColor:"red",
+
           margin: "auto",
         },
         wrapper: {
-        //   backgroundColor:"red"  
+          //   backgroundColor:"red"
+        },
+        body: {
+          // backgroundColor:"red",
+          height: "50vh",
+          overflow: "auto",
         },
       }}
-      footer={null}
-      >
+      footer={
+        <FooterButton handleSubmit={handleSubmit} formLoading={formLoading} />
+      }>
       <FormComponent {...props} />
     </Modal>
   );
