@@ -1,6 +1,6 @@
 import {   useTranslate } from "@refinedev/core";
 import { LeftOutlined, UserOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelect } from "@refinedev/antd";
 import CustomForm from "../../components/custom/form/CustomForm";
 import { useFormProvider } from "../../context/FormProvider";
@@ -73,6 +73,16 @@ const [chdriver,setChDriver] = useState<any>([])
     setChDriver(newArray[0].arry)
   },[getSelectOption])
 
+  const handleArray = useMemo(() => {
+    const newArray = array.filter((item) => {
+      if (item.id === getSelectOption) {
+        return item;
+      }
+    });
+    console.log("newArray", newArray[0].arry);
+    return newArray[0].arry;
+  }, [getSelectOption]);
+
 
 
 
@@ -92,7 +102,7 @@ const [chdriver,setChDriver] = useState<any>([])
       placeholder: "eg. Store 1",
       initialValue: "",
       required: true,
-      options: [],
+      // options: [],
       row:true,
     },
     {
@@ -290,6 +300,21 @@ const [chdriver,setChDriver] = useState<any>([])
       // options:chdriver
     },
     {
+      name: 'checkbox',
+      label: "CheckBox",
+      icon: <UserOutlined />,
+      rules: [],
+      type: "checkBox",
+      initialValue: [1],
+      required: false,
+      row:true, 
+      options:[
+        {label:"Driver 1",value:1},
+        {label:"Driver 2",value:2},
+        {label:"Driver 3",value:3},
+      ]
+    },
+    {
       name: 'createdeAt',
       label: "Created At",
       icon: <UserOutlined />,
@@ -300,11 +325,84 @@ const [chdriver,setChDriver] = useState<any>([])
         },
       ],
       type: "date",
-      // placeholder: "eg. select Categories",
+      placeholder: "eg. select Date",
       initialValue: new Date(),
       required: false,
       row:true,
-      // options:categorySelectProps?.options
+      format:"YYYY-MM-DD"
+    },
+    {
+      name: 'pickupDate',
+      label: "Pickup At",
+      icon: <UserOutlined />,
+      rules: [
+        {
+          required: true,
+          message: "Please enter the Field",
+        },
+      ],
+      type: "rangeDate",
+      placeholder: ["eg. start Date", "eg. End Date"],
+      initialValue: new Date(),
+      required: false,
+      row:true,
+      format:"YYYY-MM-DD"
+    },
+    {
+      name: 'time',
+      label: "Time",
+      icon: <UserOutlined />,
+      rules: [
+        {
+          required: true,
+          message: "Please enter the Field",
+        },
+      ],
+      type: "time",
+      placeholder: "eg. select Time",
+      initialValue: new Date(),
+      required: false,
+      row:true,
+      format:"HH:mm a"
+    },
+    {
+      name: 'timeRange',
+      label: "TimeRange",
+      icon: <UserOutlined />,
+      rules: [
+        {
+          required: true,
+          message: "Please enter the Field",
+        },
+      ],
+      type: "timeRange",
+      placeholder: ["eg. start Time", "eg. End Time"],
+      initialValue: new Date(),
+      required: false,
+      row:true,
+      format:"HH:mm a"
+    },
+    {
+      name: 'Hidden',
+      type: "hidden",
+      initialValue: 1,
+    },
+   
+    {
+      name: 'message',
+      label: "Message",
+      icon: <UserOutlined />,
+      rules: [],
+      type: "textArea",
+      placeholder:"eg. Message",
+      initialValue: '',
+      required: false,
+      row:false, 
+      options:[
+        {label:"Driver 1",value:1},
+        {label:"Driver 2",value:2},
+        {label:"Driver 3",value:3},
+      ]
     },
   ];
 

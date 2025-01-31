@@ -1,16 +1,18 @@
 import { extend } from "lodash";
 
 export type FormItems = {
-    icon: React.ReactNode;
-    label: string;
+    icon?: React.ReactNode;
+    label?: string;
     name: string;
     rules ?: [] | any;
     type: string;
-    placeholder: string;
+    placeholder?: string | any;
     initialValue: string;
-    required: boolean;
+    required?: boolean;
     options ?: [] | any;
     row?:boolean;
+    format?:string;
+    disabled?:boolean;
 };
 
 export type FooterButtonProps = { 

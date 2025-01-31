@@ -5,12 +5,13 @@ import RenderFormItem from "./RenderFormItem";
 
 const FormTemplate = ({ item }: { item: FormItems }) => {
   const screens = Grid.useBreakpoint();
-  const { icon, label,required, row} = item;
+  const { icon, label,required, row, type} = item;
   const parentStyle = {
     // backgroundColor: "red",
     padding: "10px 10px",
     width: "100%",
     height: "100%",
+    display: type =="hidden" ? "none" : "flex",
     // margin:'1%'
   };
   console.log("screens", row , screens.xl  );
@@ -23,7 +24,8 @@ const FormTemplate = ({ item }: { item: FormItems }) => {
   // console.log("item", item);
 
   return (
-      <Flex
+      <>
+        <Flex
         gap={8}
         justify="space-evenly"
         align={"center"}
@@ -36,6 +38,7 @@ const FormTemplate = ({ item }: { item: FormItems }) => {
         </Flex>
         <RenderFormItem {...item} />
       </Flex>
+      </>
   );
 };
 

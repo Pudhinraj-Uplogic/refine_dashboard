@@ -279,7 +279,7 @@ const [chdriver,setChDriver] = useState<any>([])
       placeholder: "eg. no-1, street-1, city-1",
       initialValue: "",
       required: true,
-      row:true,
+      // row:true,
       options:productSelectProps.options
     },
     {

@@ -60,9 +60,12 @@ const CustomFormModal = (
         header: {
           padding: "20px 24px",
           margin: 0,
+          // backgroundColor:"rgba(21, 128, 120, 0.7)",
+          // color:"red !important"
         },
         footer: {
           margin: 0,
+          // backgroundColor:"rgba(21, 128, 120, 0.7)"
         },
         content: {
           padding: 0,
@@ -74,7 +77,7 @@ const CustomFormModal = (
           //   backgroundColor:"red"
         },
         body: {
-          // backgroundColor:"red",
+          // backgroundColor:"rgba(21, 128, 120, 0.7)  !important",
           height: "50vh",
           overflow: "auto",
         },
