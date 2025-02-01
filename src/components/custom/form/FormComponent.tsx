@@ -71,7 +71,7 @@ const FormComponent = (props:FormProps) => {
                   // md={item && item.row ? 8 : 24}
 
                   style={{ width: "100%" }}>
-                  <FormTemplate item={item} key={index} />
+                  <FormTemplate item={item} key={index}  />
                 </Col>
               );
             })}

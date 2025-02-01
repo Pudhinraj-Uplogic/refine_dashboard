@@ -163,7 +163,6 @@ const App: React.FC = () => {
                   icon: <BikeWhiteIcon />,
                 },
               },
-              ,
               {
                 name: "settings",
                 list: "/stores",

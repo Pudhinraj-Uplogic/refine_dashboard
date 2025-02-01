@@ -7,12 +7,14 @@ export type FormItems = {
     rules ?: [] | any;
     type: string;
     placeholder?: string | any;
-    initialValue: string;
+    initialValue: string | boolean | number | any;
     required?: boolean;
     options ?: [] | any;
     row?:boolean;
     format?:string;
     disabled?:boolean;
+    isTiny?:boolean;
+    // formLoading ?: any;
 };
 
 export type FooterButtonProps = { 
