@@ -24,21 +24,135 @@ import {
   Select,
   Button,
 } from "antd";
+import {
+  ClockCircleOutlined,
+  CrownOutlined,
+  IssuesCloseOutlined,
+  MailOutlined,
+  PhoneOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 import type { IUser, IUserFilterVariables } from "../../interfaces";
-import { EyeOutlined, SearchOutlined } from "@ant-design/icons";
-import { PaginationTotal, UserStatus } from "../../components";
-import type { PropsWithChildren } from "react";
+import { useState, type PropsWithChildren } from "react";
 import { useLocation } from "react-router";
+import CustomGrid from "../../components/custom/table/CustomGrid";
 
-export const CustomerList = ({ children }: PropsWithChildren) => {
+export const CustomerList = (props: any) => {
   const go = useGo();
   const { pathname } = useLocation();
   const { showUrl } = useNavigation();
   const t = useTranslate();
   const { token } = theme.useToken();
 
-  const { tableProps, filters, sorters } = useTable<
+
+  const tableColumn = [
+    {
+      name: "id",
+      type: "number",
+      heading: 'Id',
+      export: true,
+      sortable: true,
+      filter: true,
+      filterDetails: {
+        type: "searchNumber",
+        placeholder: "Search id",
+        operator: "contain",
+      },
+    },
+    {
+      name: "firstName",
+      type: "string",
+      heading: 'First Name',
+      export: true,
+      sortable: true,
+      filter: true,
+      filterDetails: {
+        type: "searchText",
+        placeholder: "Search First Name",
+        operator: "contain",
+      },
+    },
+    {
+      name: "lastName",
+      type: "string",
+      heading: 'Last Name',
+      export: true,
+      sortable: true,
+      filter: true,
+      filterDetails: {
+        type: "searchText",
+        placeholder: "Search Last Name",
+        operator: "contain",
+      },
+    },
+    {
+      name: "gender",
+      type: "label",
+      heading: "Gender",
+      export: true,
+      sortable: false,
+      filter: true,
+      filterDetails: {
+        type: "select",
+        placeholder: "Search Gender",
+        operator: "contain",
+      },
+      labelOption: [
+        {
+          label: "Male",
+          value: 'Male',
+          theme: "info",
+        },
+        {
+          label: "Female",
+          value: 'Female',
+          theme: "warning",
+        },
+      ],
+    },
+    {
+      name: "gsm",
+      type: "string",
+      heading: 'Phone Number',
+      export: true,
+      sortable: false,
+      filter: true,
+      filterDetails: {
+        type: "searchText",
+        placeholder: "Search Phone",
+        operator: "contain",
+      },
+    },
+    {
+      name: "isActive",
+      type: "label",
+      heading: 'Status',
+      export: true,
+      sortable: false,
+      filter: true,
+      filterDetails: {
+        type: "select",
+        placeholder: "Search Status",
+        operator: "contain",
+        // mode: "multiple",
+      },
+      labelOption: [
+        {
+          label: "Active",
+          value: true,
+          theme: "success",
+        },
+        {
+          label: "Inactive",
+          value: false,
+          theme: "danger",
+        },
+      ],
+    },
+  ];
+
+  const { tableProps, filters, sorters, setFilters } = useTable<
     IUser,
     HttpError,
     IUserFilterVariables
@@ -79,150 +193,142 @@ export const CustomerList = ({ children }: PropsWithChildren) => {
     },
   });
 
+  const filterDatass = [
+    {
+      name: "id",
+      type: "string",
+      heading: 'Id',
+      placeholder: "Search Id",
+      icon: <CrownOutlined />,
+      operator: "contains",
+      value: "",
+    },
+    {
+      name: "firstName",
+      type: "string",
+      heading: 'Last Name',
+      placeholder: "Search Name",
+      icon: <UserOutlined />,
+      operator: "contains",
+      value: "",
+    },
+    {
+      name: "lastName",
+      type: "string",
+      heading:'Last Name',
+      placeholder: "Search Last Name",
+      icon: <MailOutlined />,
+      operator: "contains",
+      value: "",
+    },
+    {
+      name: "gender",
+      type: "select",
+      heading: 'Gender',
+      placeholder: "Search Gender",
+      icon: <PhoneOutlined />,
+      operator: "eq",
+      value: "",
+      initialValue: "",
+      options: [
+        {
+          label: "Male",
+          value: 'Male',
+        },
+        {
+          label: "Female",
+          value: 'Female',
+        },
+      ],
+    },
+    {
+      name: "status",
+      heading: "Status",
+      type: "select",
+      placeholder: "Status",
+      rules: [],
+      icon: <ClockCircleOutlined />,
+      label: "Status",
+      initialValue: "",
+      value: "",
+      operator: "eq",
+      options: [
+        {
+          label: "Active",
+          value: true,
+        },
+        {
+          label: "Inactive",
+          value: false,
+        },
+      ],
+    },
+  ];
+
+  const searchFileds =  [
+    // {
+    //   field: "id",
+    //   operator: "contains",
+    //   value: "",
+    // },
+    {
+      field: "firstName",
+      operator: "contains",
+      value: "",
+    },
+    // {
+    //   field: "lastName",
+    //   operator: "contains",
+    //   value: "",
+    // },
+    // {
+    //   field: "gender",
+    //   operator: "contains",
+    //   value: "",
+      
+    // },
+    // {
+    //   field: "status",
+    //   operator: "contains",
+    //   value: "",
+    // },
+  ];
+
+  const [filterDatas, setfilterDatas] = useState(filterDatass);
+  const filterCancel = () => {
+    setfilterDatas(filterDatass);
+  };
+
+  const tableData = {
+    tableProps: tableProps,
+    filters: filters,
+    sorters: sorters,
+    tableColumn: tableColumn,
+    resource: "customers",
+    title: "Customers",
+    message: "Customers",
+    createButtonText: 'Add Customer',
+    disableView: false,
+    disableEdit: false,
+    disableCreate: false,
+    disableDelete: true,
+    disableAction: false,
+    disableExport: false,
+    disableFilter: false,
+    disableSearch: false,
+    filtertext: 'Filter',
+    filterDatas: filterDatas,
+    setFilters: setFilters,
+    setfilterDatas: setfilterDatas,
+    filterCancel: () => filterCancel(),
+    filterDatass: filterDatass,
+    res: props.res,
+    searchFileds: searchFileds
+  };
+
+
   return (
-    <List
-      breadcrumb={false}
-      headerProps={{
-        extra: <ExportButton onClick={triggerExport} loading={isLoading} />,
-      }}
-    >
-      <Table
-        {...tableProps}
-        rowKey="id"
-        scroll={{ x: true }}
-        pagination={{
-          ...tableProps.pagination,
-          showTotal: (total) => (
-            <PaginationTotal total={total} entityName="users" />
-          ),
-        }}
-      >
-        <Table.Column
-          key="id"
-          dataIndex="id"
-          title="ID #"
-          render={(value) => (
-            <Typography.Text
-              style={{
-                whiteSpace: "nowrap",
-              }}
-            >
-              #{value}
-            </Typography.Text>
-          )}
-          filterIcon={(filtered) => (
-            <SearchOutlined
-              style={{
-                color: filtered ? token.colorPrimary : undefined,
-              }}
-            />
-          )}
-          defaultFilteredValue={getDefaultFilter("orderNumber", filters, "eq")}
-          filterDropdown={(props) => (
-            <FilterDropdown {...props}>
-              <InputNumber
-                addonBefore="#"
-                style={{ width: "100%" }}
-                placeholder={t("orders.filter.id.placeholder")}
-              />
-            </FilterDropdown>
-          )}
-        />
-        <Table.Column
-          align="center"
-          key="avatar"
-          dataIndex={["avatar"]}
-          title={t("users.fields.avatar.label")}
-          render={(value) => <Avatar src={value[0].url} />}
-        />
-        <Table.Column
-          key="fullName"
-          dataIndex="fullName"
-          title={t("users.fields.name")}
-          defaultFilteredValue={getDefaultFilter(
-            "fullName",
-            filters,
-            "contains",
-          )}
-          filterDropdown={(props) => (
-            <FilterDropdown {...props}>
-              <Input
-                style={{ width: "100%" }}
-                placeholder={t("users.filter.name.placeholder")}
-              />
-            </FilterDropdown>
-          )}
-        />
-        <Table.Column
-          key="gsm"
-          dataIndex="gsm"
-          title={t("users.fields.gsm")}
-          defaultFilteredValue={getDefaultFilter("gsm", filters, "eq")}
-          filterDropdown={(props) => (
-            <FilterDropdown {...props}>
-              <Input
-                style={{ width: "100%" }}
-                placeholder={t("users.filter.gsm.placeholder")}
-              />
-            </FilterDropdown>
-          )}
-        />
-        <Table.Column
-          key="createdAt"
-          dataIndex="createdAt"
-          title={t("users.fields.createdAt")}
-          render={(value) => <DateField value={value} format="LLL" />}
-          sorter
-        />
-        <Table.Column
-          key="isActive"
-          dataIndex="isActive"
-          title={t("users.fields.isActive.label")}
-          render={(value) => {
-            return <UserStatus value={value} />;
-          }}
-          sorter
-          defaultSortOrder={getDefaultSortOrder("isActive", sorters)}
-          defaultFilteredValue={getDefaultFilter("isActive", filters, "eq")}
-          filterDropdown={(props) => (
-            <FilterDropdown {...props}>
-              <Select
-                style={{ width: "100%" }}
-                placeholder={t("users.filter.isActive.placeholder")}
-              >
-                <Select.Option value="true">
-                  {t("users.fields.isActive.true")}
-                </Select.Option>
-                <Select.Option value="false">
-                  {t("users.fields.isActive.false")}
-                </Select.Option>
-              </Select>
-            </FilterDropdown>
-          )}
-        />
-        <Table.Column<IUser>
-          fixed="right"
-          title={t("table.actions")}
-          render={(_, record) => (
-            <Button
-              icon={<EyeOutlined />}
-              onClick={() => {
-                return go({
-                  to: `${showUrl("users", record.id)}`,
-                  query: {
-                    to: pathname,
-                  },
-                  options: {
-                    keepQuery: true,
-                  },
-                  type: "replace",
-                });
-              }}
-            />
-          )}
-        />
-      </Table>
-      {children}
-    </List>
+
+    <CustomGrid {...tableData}/>
   );
 };

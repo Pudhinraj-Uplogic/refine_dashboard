@@ -34,6 +34,112 @@ import type {
 export const OrderList = () => {
   const { token } = theme.useToken();
 
+  const tableColumn = [
+    {
+      name: "id",
+      type: "number",
+      heading: 'Id',
+      export: true,
+      sortable: true,
+      filter: true,
+      filterDetails: {
+        type: "searchNumber",
+        placeholder: "Search id",
+        operator: "contain",
+      },
+    },
+    {
+      name: "firstName",
+      type: "string",
+      heading: 'First Name',
+      export: true,
+      sortable: true,
+      filter: true,
+      filterDetails: {
+        type: "searchText",
+        placeholder: "Search First Name",
+        operator: "contain",
+      },
+    },
+    {
+      name: "lastName",
+      type: "string",
+      heading: 'Last Name',
+      export: true,
+      sortable: true,
+      filter: true,
+      filterDetails: {
+        type: "searchText",
+        placeholder: "Search Last Name",
+        operator: "contain",
+      },
+    },
+    {
+      name: "gender",
+      type: "label",
+      heading: "Gender",
+      export: true,
+      sortable: false,
+      filter: true,
+      filterDetails: {
+        type: "select",
+        placeholder: "Search Gender",
+        operator: "contain",
+      },
+      labelOption: [
+        {
+          label: "Male",
+          value: 'Male',
+          theme: "success",
+        },
+        {
+          label: "Female",
+          value: 'Female',
+          theme: "warning",
+        },
+      ],
+    },
+    {
+      name: "gsm",
+      type: "string",
+      heading: 'Phone Number',
+      export: true,
+      sortable: false,
+      filter: true,
+      filterDetails: {
+        type: "searchText",
+        placeholder: "Search Phone",
+        operator: "contain",
+      },
+    },
+    {
+      name: "isActive",
+      type: "label",
+      heading: 'Status',
+      export: true,
+      sortable: false,
+      filter: true,
+      filterDetails: {
+        type: "select",
+        placeholder: "Search Status",
+        operator: "contain",
+        // mode: "multiple",
+      },
+      labelOption: [
+        {
+          label: "Active",
+          value: true,
+          theme: "success",
+        },
+        {
+          label: "Inactive",
+          value: false,
+          theme: "danger",
+        },
+      ],
+    },
+  ];
+
   const { tableProps, sorters, filters } = useTable<
     IOrder,
     HttpError,
